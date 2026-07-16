@@ -22,9 +22,9 @@ async function main(){
 
 main();
 
-middleware
-dotenv
-route
+// middleware
+// dotenv
+// route
 
 
 
