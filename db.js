@@ -5,8 +5,7 @@ const objectId = schema.ObjectId
 // mongoose.conect("mongodb://localhost:27017/course_selling-app")
 
 const userSchema= new schema({
-    _id:objectId,
-    email:{type:String,unique:true},
+    email: {type:String,unique:true},
     password:String,    
     firstName:String,
     lastName:String
@@ -14,7 +13,7 @@ const userSchema= new schema({
 })
 
 const adminSchema= new schema({
-    _id:objectId,
+   
     email:{type:String,unique:true},
     password:String,    
     firstName:String,

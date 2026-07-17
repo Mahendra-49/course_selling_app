@@ -6,6 +6,7 @@ const UserRoute= require("./Route/user")
 const AdminRoute= require("./Route/admin")
 
 const app= express()
+app.use(express.json())
 
 
 

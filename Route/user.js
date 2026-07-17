@@ -4,11 +4,14 @@ const userRoute = express.Router();
 const userModel = require("../db")
 
 
-userRoute.post('/Signup',async (req,res)=>{
-    const {email,password,firstName,lastName} = req.body;
+userRoute.post('/Signup',async function(req,res){
+    const { email,password,firstName,lastName } = req.body;
 
+    // todo - zod validation , pasword hash, 
     const hashedPassword= bcrypt.hash(password,4);
     // console.log(hashedPassword)
+
+    //put inside try catch block
      await userModel.create({
         email:email,
         password:password,
