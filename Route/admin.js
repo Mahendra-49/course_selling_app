@@ -1,5 +1,5 @@
-const Router = require("express")
-const adminRoute = Router();
+const express = require("express")
+const adminRoute =express.Router();
 const adminModel = require("../db")
 
 adminRoute.post('adminSignup',function(req,res){
@@ -38,6 +38,5 @@ adminRoute.put('/addContent',function(req,res){
     })
 })
 
-module.exports={
-    adminRoute:adminRoute
-}
+module.exports=adminRoute
+

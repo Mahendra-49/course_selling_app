@@ -1,5 +1,6 @@
 const express = require('express')
-const jwt=require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
+const mongoose = require("mongoose")
 const CourseRoute= require("./Route/course")
 const UserRoute= require("./Route/user")
 const AdminRoute= require("./Route/admin")
@@ -14,15 +15,15 @@ app.use("/course",CourseRoute)
 app.use("/admin",AdminRoute)
 
 
-// async function main(){
-//     await mongoose.connect("mongodb://localhost:27017/course_selling-app")
-//     app.listen(3000)
-//     console.log("listening on port 3000")
-// }
+async function main(){
+    await mongoose.connect("mongodb://localhost:27017/course_selling-app")
+    app.listen(3000)
+    console.log("listening on port 3000")
+}
 
-// main();
+main();
 
-app.listen(3000)
+// app.listen(3000)
 // middleware
 // dotenv
 // route

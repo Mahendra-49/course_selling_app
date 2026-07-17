@@ -1,6 +1,6 @@
-const Router =require('express')
+const express =require('express')
 const bcrypt= require("bcrypt")
-const userRoute =Router();  
+const userRoute = express.Router();  
 const userModel = require("../db")
 
 
@@ -44,6 +44,4 @@ userRoute.get('/purchases',(req,res)=>{
 })
 
 
-module.exports={
-    UserRoute:userRoute
-}
+module.exports = userRoute
