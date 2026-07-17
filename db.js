@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const schema= mongoose.Schema
 const objectId = schema.ObjectId
 
-mongoose.conect("mongodb://localhost:27017/course_selling-app")
+// mongoose.conect("mongodb://localhost:27017/course_selling-app")
 
 const userSchema= new schema({
     _id:objectId,
@@ -44,7 +44,7 @@ const purchaseModel = mongoose.model("purchase",purchaseSchema)
 const courseModel = mongoose.model("course",courseSchema)
 
 
-module.exports(
+module.exports=(
     userModel,
     adminModel,
     purchaseModel,

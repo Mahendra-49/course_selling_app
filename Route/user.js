@@ -1,16 +1,41 @@
-const {Router} =require('express')
+const Router =require('express')
+const bcrypt= require("bcrypt")
 const userRoute =Router();  
+const userModel = require("../db")
 
-userRoute.post('/userSignup',(req,res)=>{
+
+userRoute.post('/Signup',async (req,res)=>{
+    const {email,password,firstName,lastName} = req.body;
+
+    const hashedPassword= bcrypt.hash(password,4);
+    // console.log(hashedPassword)
+     await userModel.create({
+        email:email,
+        password:password,
+        firstName: firstName,
+        lastName: lastName
+     })
+
+
+    
+
     res.send({
         message:"signup endpoint"
     })
 })
-userRoute.post('/userLogin',(req,res)=>{
+
+
+userRoute.post('/Login',(req,res)=>{
+    const {email,password}= req.body
+
+    const checkPassword= bcrypt.compare(response.password,password)
     res.send({
         message:"signin endpoint"
     })
 })
+
+// adminRoute.use(middleware)
+
 
 userRoute.get('/purchases',(req,res)=>{
     res.send({
@@ -19,6 +44,6 @@ userRoute.get('/purchases',(req,res)=>{
 })
 
 
-module.exports({
-    UserRoute:UserRoute
-})
+module.exports={
+    UserRoute:userRoute
+}

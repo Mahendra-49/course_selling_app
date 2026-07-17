@@ -1,8 +1,10 @@
-const {Router} = require("express")
+const Router = require("express")
 const adminRoute = Router();
-const {adminModel} = require("../db")
+const adminModel = require("../db")
 
 adminRoute.post('adminSignup',function(req,res){
+    const {email,password,firstName,lastName} = req.body;
+
     res.send({
         message:"signup endpoint"
     })
@@ -14,7 +16,7 @@ adminRoute.post('/adminLogin',function(req,res){
     })
 })
 
-adminRoute.use(middleware)
+// adminRoute.use(middleware)
 
 adminRoute.post('/createCourse',function(req,res){
     res.send({
@@ -36,6 +38,6 @@ adminRoute.put('/addContent',function(req,res){
     })
 })
 
-module.exports({
+module.exports={
     adminRoute:adminRoute
-})
+}

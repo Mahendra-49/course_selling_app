@@ -1,6 +1,4 @@
-
-
-const {Router} =require('express')
+const Router =require('express')
 const courseRoute =Router();       // Router() is function
 
 
@@ -19,6 +17,6 @@ courseRoute.post('/purchase',(req,res)=>{
 
 
 
-module.exports({
-    CourseRoute:CourseRoute
-})
+module.exports={
+    CourseRoute:courseRoute
+}
