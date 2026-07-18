@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const mongoose = require("mongoose")
@@ -17,7 +18,7 @@ app.use("/admin",AdminRoute)
 
 
 async function main(){
-    await mongoose.connect("mongodb://localhost:27017/new_coursera")
+    await mongoose.connect(process.env.MONGO_URL)
     app.listen(3000)
     
 }
@@ -26,9 +27,7 @@ main();
 console.log("listening on port 3000")
 
 // app.listen(3000)
-// middleware
-// dotenv
-// route
+
 
 
 

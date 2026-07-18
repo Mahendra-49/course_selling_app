@@ -80,10 +80,30 @@ adminRoute.delete('/deleteCourse',adminmiddleware,function(req,res){
 })
 
 
-adminRoute.put('/addContent',adminmiddleware,function(req,res){
+adminRoute.get("/course/bulk",adminmiddleware,async function (req,res){
+    
+
+
+
+})
+
+
+
+adminRoute.put('/addContent',adminmiddleware, async function(req,res){
     const adminId = req.adminId
+    const { courseId , title,description,price,imageUrl }= req.body;
+
+    await courseModel.updateOne(courseId,
+        { title: title,
+            description: description,
+            price: price,
+            imageUrl: imageUrl
+
+        }
+    )
+
     res.send({
-        message:"signup endpoint"
+        message:"course content edited"
     })
 })
 

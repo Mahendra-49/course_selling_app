@@ -9,6 +9,7 @@ courseRoute.get('/allCourses',(req,res)=>{
     })
 })
 
+//payment
 courseRoute.post('/purchase',(req,res)=>{
     res.send({
         message:"user purchase a course"

@@ -62,7 +62,7 @@ userRoute.post('/signin',async function (req,res){
     // })
 })
 
-// adminRoute.use(middleware)
+
 
 
 userRoute.get('/purchases',usermiddleware,(req,res)=>{
