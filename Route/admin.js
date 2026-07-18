@@ -72,40 +72,64 @@ adminRoute.post('/createCourse',adminmiddleware,async function(req,res){
 })
 
 
-adminRoute.delete('/deleteCourse',adminmiddleware,function(req,res){
-    const adminId = req.adminId // this id comes from middleware 
-    res.send({
-        message:"signup endpoint"
-    })
-})
-
-
-adminRoute.get("/course/bulk",adminmiddleware,async function (req,res){
-    
-
-
-
-})
-
-
 
 adminRoute.put('/addContent',adminmiddleware, async function(req,res){
     const adminId = req.adminId
     const { courseId , title,description,price,imageUrl }= req.body;
 
-    await courseModel.updateOne(courseId,
+    await courseModel.updateOne(
+        { _id:courseId,
+         createrId:adminId
+        },
         { title: title,
             description: description,
             price: price,
             imageUrl: imageUrl
 
-        }
-    )
+        })
 
     res.send({
-        message:"course content edited"
+        message:"course content updated"
     })
 })
+
+
+adminRoute.get("/course/bulk",adminmiddleware,async function (req,res){
+     const adminId = req.adminId
+ const courses=await courseModel.find(
+        {
+         createrId:adminId
+        })
+        
+
+    res.send({
+        courses,
+
+        message:"courses"
+    })
+
+
+})
+
+adminRoute.delete('/deleteCourse',adminmiddleware,function(req,res){
+   
+    const adminId = req.adminId
+    const { courseId  }= req.body;
+
+    const course=await courseModel.deleteOne(
+        { _id:courseId,
+         createrId:adminId
+        })
+
+    res.send({
+        course,
+        message:"course deleted"
+    })
+   
+})
+
+
+
 
 module.exports=adminRoute
 
