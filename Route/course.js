@@ -1,20 +1,34 @@
-const express =require('express')
+const express =require('express');
+const { purchaseModel } = require('../db');
+const { usermiddleware }= require("../middleware/user")
 const courseRoute =express.Router();       // Router() is function
 
 
-courseRoute.get('/allCourses',(req,res)=>{
+//payment: set user to their purchased course in database
+courseRoute.post('/purchase',usermiddleware,async function(req,res){
+    const userId = req.userId;
+    const courseId = req.body.courseId;
 
-    res.send({
-        message:"all courses"
+
+    const usercourse= await purchaseModel.create({
+        courseId,
+        userId
     })
-})
-
-//payment
-courseRoute.post('/purchase',(req,res)=>{
     res.send({
         message:"user purchase a course"
     })
 })
+
+//this endpoint not require authentication
+courseRoute.get('/allCourses',async function(req,res){
+    const allcourses= await courseModel.find({})
+
+    res.send({
+        allcourses,
+        message:"all courses"
+    })
+})
+
 
 
 

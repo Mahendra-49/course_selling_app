@@ -3,7 +3,7 @@ const bcrypt= require("bcrypt")
 const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 const userRoute = express.Router();  
-const {userModel} = require("../db")
+const {userModel , purchaseModel } = require("../db")
 const { JWT_USER_SECRET} = require("../config")
 const { usermiddleware } = require("../middleware/user")
 
@@ -64,11 +64,16 @@ userRoute.post('/signin',async function (req,res){
 
 
 
+//user's puchases
+userRoute.get('/purchases',usermiddleware,async function(req,res){
+     const userId = req.userId;
+     const courses = await purchaseModel.find({
+        userId:userId
+     })
 
-userRoute.get('/purchases',usermiddleware,(req,res)=>{
-     const userId = req.userId
     res.send({
-        message:"my purchase endpoint"
+        courses,
+        message:"course purchased by user"
     })
 })
 
