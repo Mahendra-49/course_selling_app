@@ -1,0 +1,7 @@
+const JWT_USER_SECRET = "FJRUGH"
+const JWT_ADMIN_SECRET = "UTYEIU"
+
+module.exports={
+    JWT_ADMIN_SECRET,
+    JWT_USER_SECRET
+}
