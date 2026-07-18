@@ -17,12 +17,13 @@ app.use("/admin",AdminRoute)
 
 
 async function main(){
-    await mongoose.connect("mongodb://localhost:27017/course_selling-app")
+    await mongoose.connect("mongodb://localhost:27017/new_coursera")
     app.listen(3000)
-    console.log("listening on port 3000")
+    
 }
 
 main();
+console.log("listening on port 3000")
 
 // app.listen(3000)
 // middleware
