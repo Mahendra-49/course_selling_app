@@ -1,8 +1,10 @@
 const express = require("express")
 const adminRoute =express.Router();
 const jwt = require("jsonwebtoken")
-const JWT_ADMIN_SECRET="UTYEIU  "
 const { adminModel } = require("../db")
+const {JWT_ADMIN_SECRET} = require("../config")
+const { adminmiddleware } = require("../middleware/admin")
+
 
 
 
@@ -48,27 +50,23 @@ adminRoute.post('/signin', async function(req,res){
         }
 })
 
-// adminRoute.use(middleware)
-function auth(req,res,next){
 
-
-    
-}
-adminRoute.post('/createCourse',function(req,res){
+adminRoute.post('/createCourse',adminmiddleware,function(req,res){
     res.send({
         message:"signup endpoint"
     })
 })
 
 
-adminRoute.delete('/deleteCourse',function(req,res){
+adminRoute.delete('/deleteCourse',adminmiddleware,function(req,res){
+    const adminId = req.adminId // this id comes from middleware 
     res.send({
         message:"signup endpoint"
     })
 })
 
 
-adminRoute.put('/addContent',function(req,res){
+adminRoute.put('/addContent',adminmiddleware,function(req,res){
     res.send({
         message:"signup endpoint"
     })

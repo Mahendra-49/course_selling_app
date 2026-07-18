@@ -4,7 +4,11 @@ const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 const userRoute = express.Router();  
 const {userModel} = require("../db")
-const JWT_USER_SECRET="FJRUGH"
+const { JWT_USER_SECRET} = require("../config")
+const { usermiddleware } = require("../middleware/user")
+
+
+
 
 userRoute.post('/signup',async function(req,res){
     const { email,password,firstName,lastName } = req.body;
@@ -33,7 +37,7 @@ userRoute.post('/signin',async function (req,res){
     const {email,password}= req.body
 
     // const checkPassword= bcrypt.compare(response.password,password)
-    const response=  await userModel.findOne({email:email,password})
+    const response =  await userModel.findOne({email:email,password})
 
     if(response){
         const token = jwt.sign(
@@ -61,7 +65,8 @@ userRoute.post('/signin',async function (req,res){
 // adminRoute.use(middleware)
 
 
-userRoute.get('/purchases',(req,res)=>{
+userRoute.get('/purchases',usermiddleware,(req,res)=>{
+     const userId = req.userId
     res.send({
         message:"my purchase endpoint"
     })
