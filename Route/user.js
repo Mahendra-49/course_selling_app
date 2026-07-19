@@ -3,7 +3,7 @@ const bcrypt= require("bcrypt")
 const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 const userRoute = express.Router();  
-const {userModel , purchaseModel } = require("../db")
+const {userModel , purchaseModel, courseModel } = require("../db")
 const { JWT_USER_SECRET} = require("../config")
 const { usermiddleware } = require("../middleware/user")
 
@@ -67,11 +67,25 @@ userRoute.post('/signin',async function (req,res){
 //user's puchases
 userRoute.get('/purchases',usermiddleware,async function(req,res){
      const userId = req.userId;
-     const courses = await purchaseModel.find({
+     const purchases = await purchaseModel.find({
         userId:userId
+     })
+ 
+     //this array store the all coursesId that user buyed
+     const puchasesCourseId =[];
+
+
+     for(let i=0;i<purchases.length;i++){
+        puchasesCourseId.push(purchases[i].courseId)
+     }
+
+     //it map the courseId with the all available courses and return the match courses with there details
+     const courses= await courseModel.find({
+        _id: {$in :purchasesCourseId}
      })
 
     res.send({
+        purchases,
         courses,
         message:"course purchased by user"
     })
